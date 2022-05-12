@@ -20,7 +20,9 @@ def merge_channel_shp(data_list, output_filename="merged_channel"):
         else:
             merged_shp = merged_shp.append(channel_shp)
     output_filepath = "./Data/OutputData/%s.shp" % output_filename
+    geojson_filepath = "./Data/OutputData/%s.geojson" % output_filename
     merged_shp.to_file(output_filepath, encoding='utf8')
+    merged_shp.to_file(geojson_filepath, encoding='utf8', driver="GeoJSON")
     return merged_shp, output_filepath
 
 
@@ -33,7 +35,10 @@ def calc_nearest(left_shp_path, right_shp_path, output_filename="nearest_shp"):
     left_w_right_data = calc_weight(left_w_right_data, "distance", "distance")
 
     output_filepath = "./Data/OutputData/%s.shp" % output_filename
+    geojson_filepath = "./Data/OutputData/%s.geojson" % output_filename
     left_w_right_data.to_file(output_filepath, encoding='utf8')
+    left_w_right_data.to_file(
+        geojson_filepath, encoding='utf8', driver="GeoJSON")
     return left_w_right_data, output_filepath
 
 
